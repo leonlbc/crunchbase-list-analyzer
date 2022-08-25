@@ -9,4 +9,6 @@ de acordo com as metricas da Crunchbase
 
 
 1) Requests que pegam lista principal e salva a resposta -- FEITO
-2) API
+2) Detectar resposta invalida
+3) Modelar objeto de resposta
+4) Conectar API a base de dados
