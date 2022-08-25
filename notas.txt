@@ -1,0 +1,12 @@
+Objetivo
+
+Fazer um WebApp, em Node.js, que acessa os arquivos do scraping
+
+O script de scraping deve rodar diariamente
+
+Essa API pega todos os dias informacoes das 100 startups de tech mais quentes,
+de acordo com as metricas da Crunchbase
+
+
+1) Requests que pegam lista principal e salva a resposta -- FEITO
+2) API
