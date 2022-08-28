@@ -1,23 +1,21 @@
-import request_api as api
 import utils.file_utils as f_utils
-import request_settings
+from request import Request
 import os
 
-def api_main(requests = ['crunchBaseList_request.json']):
-	#Confere se ja acessou hj -> Faz a chamada da API -> Salva a resposta
+def api_main(requests = ['crunchBaseList']):
 
 	for json_file in requests:
-		_headers, url, payload, api_name, last_access = request_settings.load(json_file)
-		print('> Acessando a API: ' + api_name + '...')
-		if f_utils.already_saved_today(last_access) == False:
+		req = Request(json_file)
+		if f_utils.already_saved_today(req.last_access) == False:
+			print('> Acessando a API: ' + req.api_name + '...')
 			try:
-				json_response = api.request_api(url, payload, _headers)
-			except ConnectionError():
-				print('> Nao conseguiu acessar a API: '+ api_name + '!')
+				json_response = req.call_api()
+			except ConnectionError:
+				print('> Nao conseguiu acessar a API: '+ req.api_name + '!')
 			else:
-				f_utils.save_response(json_response, api_name)
+				f_utils.save_response(json_response, req.api_name)
 		else:
-			print("> A API " + api_name + " ja foi acessada hoje")
+			print("> A API " + req.api_name + " ja foi acessada hoje")
 
 if __name__ == '__main__':
 	api_main()

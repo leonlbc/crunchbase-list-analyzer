@@ -20,4 +20,4 @@ def save_response(json_response, filename):
 	filename = format_filename(filename)
 	file = os.path.join(dirname, 'saved', filename)
 	with open(file, 'w') as outfile:
-			json.dump(json_response, outfile)
+		json.dump(json_response, outfile)
