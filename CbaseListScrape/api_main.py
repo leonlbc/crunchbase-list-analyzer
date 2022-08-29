@@ -9,7 +9,9 @@ def api_main(requests = ['crunchBaseList']):
 		if f_utils.already_saved_today(req.last_access) == False:
 			print('> Acessando a API: ' + req.api_name + '...')
 			json_response = req.call_api()
-			f_utils.save_response(json_response, req.api_name)
+			if json_response != None:
+				f_utils.save_response(json_response, req.api_name)
+				#Factory de Salvar
 		else:
 			print("> A API " + req.api_name + " ja foi acessada hoje")
 

@@ -60,20 +60,29 @@ class Request:
 
 	def call_api(self):
 		response = requests.post(self.url, json = self.payload, headers = self._headers)
+		if validate_json(response):
+			json_response = response.json()
+			self.update_last_access()
+			return json_response
+		print("> Erro ao acessar API")
+		return None
+
+	def validate_json(self, response):
 		try:
 			response.json()
-		except ValueError:
 			print('> Resposta: ' + response.text[:30] + '(...)')
-			raise ValueError("> Resposta Invalida!")
+		except ValueError:
+			print("> Resposta Invalida!")
+			return False
+
 		try:
 			response.raise_for_status()
 		except requests.exceptions.HTTPError as e:
 			print("> Erro de conexao!")
-			raise ConnectionError
-		json_response = response.json()
-		return json_response
+			return False
+		return True
 
-	def update_last_call(self):
+	def update_last_access(self):
 		request_path = os.path.join(self.dirname, self.params_filename + '_request.json')
 
 		#TODO: Erro se o arquivo n for encontrado
