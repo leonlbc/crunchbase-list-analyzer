@@ -1,7 +1,6 @@
 import utils.file_utils as f_utils
-from request import Request
 import storage
-import os
+from request import Request
 
 def api_main(apis = ['crunchBaseList']):
 

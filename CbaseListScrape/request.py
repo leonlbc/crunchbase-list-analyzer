@@ -17,7 +17,7 @@ class Request:
 		print('')
 		print('*Request Params* ')
 		print('Header: ' + str(self._headers)[0:30] + '(...)')
-		print('Cookies: ' + str(self._headers['cookies'])[0:30]+ '(...)')
+		print('Cookie: ' + str(self._headers['cookie'])[0:30]+ '(...)')
 		print('Url: ' + str(self.url))
 		print('Payload: ' + str(self.payload)[0:30]+ '(...)')
 		print('Name: ' + str(self.api_name))
@@ -51,7 +51,7 @@ class Request:
 		except FileNotFoundError:
 			raise FileNotFoundError('> Arquivo de cookies nao encontrado')
 		else:
-			_headers['cookies'] = cookies
+			_headers['cookie'] = cookies
 		url = request['url']
 		payload = request['payload']
 		api_name = request['api_name']
@@ -60,6 +60,7 @@ class Request:
 
 	def call_api(self):
 		response = requests.post(self.url, json = self.payload, headers = self._headers)
+		
 		if self.validate_json(response):
 			json_response = response.json()
 			self.update_last_access()
@@ -92,5 +93,6 @@ class Request:
 		today = date.today()
 		request['last_access'] = today.strftime("%d%m%Y")
 
+		json_obj = json.dumps(request, indent=4)
 		with open(request_path, 'w') as f:
-			json.dump(request, f)
+			f.write(json_obj)
