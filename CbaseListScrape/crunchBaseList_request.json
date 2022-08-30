@@ -1,4 +1,7 @@
 {
+	"storage_type": [
+		"local"
+	],
 	"api_name": "crunchBaseList",
 	"url": "https://www.crunchbase.com/v4/data/lists/organization.companies/18356751-e468-4735-b94b-c22e4a87e838?source=list",
 	"payload": {
@@ -13,7 +16,7 @@
 		"accept": "application/json, text/plain, */*",
 		"accept-encoding": "gzip, deflate, br",
 		"accept-language": "en-US,en;q=0.9,pt;q=0.8",
-		"content-length": "837",
+		"content-length": "899",
 		"content-type": "application/json",
 		"cookie": "",
 		"origin": "https://www.crunchbase.com",
@@ -24,8 +27,7 @@
 		"sec-fetch-dest": "empty",
 		"sec-fetch-mode": "cors",
 		"sec-fetch-site": "same-origin",
-		"upgrade-insecure-requests": "1",
-		"user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.82 Mobile Safari/537.36",
+		"user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Mobile Safari/537.36",
 		"x-requested-with": "XMLHttpRequest",
 		"x-xsrf-token": "riEbKrK1vUMJfRvgW52kaJeUBEVy0CZFIfD/REV9Zio"
 	},

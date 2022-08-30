@@ -1,17 +1,17 @@
 import utils.file_utils as f_utils
 from request import Request
+import storage
 import os
 
-def api_main(requests = ['crunchBaseList']):
+def api_main(apis = ['crunchBaseList']):
 
-	for json_file in requests:
-		req = Request(json_file)
+	for api_name in apis:
+		req = Request(api_name)
 		if f_utils.already_saved_today(req.last_access) == False:
 			print('> Acessando a API: ' + req.api_name + '...')
 			json_response = req.call_api()
 			if json_response != None:
-				f_utils.save_response(json_response, req.api_name)
-				#Factory de Salvar
+				f_utils.save(json_response, req.api_name)
 		else:
 			print("> A API " + req.api_name + " ja foi acessada hoje")
 

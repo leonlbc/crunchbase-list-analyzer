@@ -15,7 +15,7 @@ class Request:
 
 	def print_infos(self):
 		print('')
-		print('Params ' + '_'*30)
+		print('*Request Params* ')
 		print('Header: ' + str(self._headers)[0:30] + '(...)')
 		print('Cookies: ' + str(self._headers['cookies'])[0:30]+ '(...)')
 		print('Url: ' + str(self.url))
@@ -60,7 +60,7 @@ class Request:
 
 	def call_api(self):
 		response = requests.post(self.url, json = self.payload, headers = self._headers)
-		if validate_json(response):
+		if self.validate_json(response):
 			json_response = response.json()
 			self.update_last_access()
 			return json_response
