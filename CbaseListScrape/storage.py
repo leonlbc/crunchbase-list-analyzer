@@ -1,10 +1,12 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 import json, os
+from sqlalchemy import create_engine
+from datetime import date
 
 dirname = os.path.dirname(os.path.dirname(__file__))
 
-def ChooseStorage(filename, json_file, strg = 'file'):
+def ChooseStorage(strg = 'file'):
 
     strg_types = [ResponseLocalStorage(), ResponseDBStorage()]
     if strg == 'file':
@@ -40,66 +42,35 @@ class ResponseDBStorage(ResponseStorage):
 class StorageType(ABC):
 
     @abstractmethod
-    def save(self):
+    def save(self, json_response, filename):
         pass
 
 
 class LocalStorage(StorageType):
 
     #json_file, api_name(filename)
-    def save(self):
+    def save(self, json_response, filename):
         print('Salvando...')
-        filename = LocalStorage.format_filename(filename)
-        file = os.path.join(dirname, 'saved', filename)
+        filename = self.format_filename(filename)
+        file = os.path.join(dirname, 'CbaseListScrape', 'saved', filename)
         with open(file, 'w') as outfile:
             json.dump(json_response, outfile)
         return
     
     #Formata nome do arquivo para ficar no formato (...)ddmmyy.json
-    @staticmethod
-    def format_filename(filename):
+    def format_filename(self, filename):
+        today = date.today()
         time_format = today.strftime("%d%m%Y")
         return filename + time_format + ".json"
 
 
 class DbStorage(StorageType):
 
-    def save(self):
+    def set_db(self):
+        engine = create_engine("mysql+pymysql://"+ USER +":" + PASSW +"@" + IP + "/" + DBNAME + "?charset=utf8mb4")
+        conn = engine.connect()
+
+    def save(self, json_response, filename):
         #TODO: Implement save
         return
-
-
-class SaveResponse(ABC):
-
-    @abstractmethod
-    def save(self):
-        pass
-
-
-class SaveFile(SaveResponse):
-
-    def __init__(self, json_response, filename):
-        return
-
-    def save(self):
-        print('Salvando...')
-        filename = format_filename(filename)
-        file = os.path.join(dirname, 'saved', filename)
-        with open(file, 'w') as outfile:
-            json.dump(json_response, outfile)
-
-
-class SaveDB(SaveResponse):
-
-    def __init__(self, json_response, filename):
-        self.json_response = json_response
-        self.filename = filename
-        return
-
-    def save(self):
-        print('Salvando...')
-        return
-    
-    def connect_db(self):
-        pass
 

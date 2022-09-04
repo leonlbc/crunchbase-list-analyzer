@@ -2,29 +2,27 @@
 class Company:
 
     def __init__(self, company_params):
-        self.year_founded = format_year(company_params['year_founded'])
-        self.name = company_params['name']
-        self.founders = company_params['founders']
+        self.uuid = company_params['uuid']
+        self.year_founded = self.format_year(company_params['founded_on'])
+        self.name = company_params['identifier']
+        self.founders = company_params['founder_identifiers']
         self.categories = company_params['categories']
-        self.short_description = company_params['short_desc']
-        self.num_employees = format_employees(company_params['num_employees'])
+        self.short_description = company_params['short_description']
+        self.num_employees = self.format_employees(company_params['num_employees_enum'])
         self.last_funding_type = company_params['last_funding_type']
-        self.locations = company_params['locations']
-        '''{
-            "country": "",
-            "city": ""
-        }'''
         self.last_funding_at = company_params['last_funding_at']
-        self.crunchbase_rank = company_params['crunchbase_rank']
+        self.crunchbase_rank = company_params['rank_org_company']
+        self.acquirer = company_params['acquirer_identifier']
+        self.announce_date = company_params['acquisition_announced_on']
         self.funding_stage = company_params['funding_stage']
-        self.acquisition = company_params['acquisition']
-        '''{
-            "acquirer": "",
-            "announce date": "",
-            "funding stage": ""
-        }'''
+        self.continent = company_params['continent']
+        self.country = company_params['country']
+        self.region = company_params['region']
+        self.city = company_params['city']
 
     def format_employees(self, code_employee):
+        if code_employee == None:
+            return code_employee
         employees = {
             "c_00001_00010": "1-10",
             "c_00011_00050": "11-50",
@@ -39,6 +37,8 @@ class Company:
         return employees[code_employee]
     
     def format_year(self, date):
-        #Recebe data no formato 2022-02-02 e deixa apenas 2022
-        return date[:4]
+        #Recebe data no formato yyyy-dd-mm e deixa yyyy
+        if date != None:
+            return date[:4]
+        return date
 
