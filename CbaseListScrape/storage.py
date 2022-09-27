@@ -1,52 +1,24 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 import json, os
-from sqlalchemy import create_engine
+#from sqlalchemy import create_engine, sessionmaker
 from datetime import date
+from dotenv import load_dotenv
 
 dirname = os.path.dirname(os.path.dirname(__file__))
 
-def ChooseStorage(strg = 'file'):
-
-    strg_types = [ResponseLocalStorage(), ResponseDBStorage()]
-    if strg == 'file':
-        strg = strg_types[0]
-    elif strg == 'db':
-        strg = strg_types[1]
-    return strg
-
-
-class ResponseStorage(ABC):
-
-    @abstractmethod
-    def useStorage(self):
-        pass
-
-    def storage_type(self):
-        storage = self.useStorage()
-        return storage
+class StorageType():
+    
+    @staticmethod
+    def choose(strg):
+        if strg == 'file':
+            strg = LocalStorage()
+        elif strg == 'db':
+            strg = DbStorage()
+        return strg
 
 
-class ResponseLocalStorage(ResponseStorage):
-
-    def useStorage(self):
-        return LocalStorage()
-
-
-class ResponseDBStorage(ResponseStorage):
-
-    def useStorage(self):
-        return DbStorage()
-
-
-class StorageType(ABC):
-
-    @abstractmethod
-    def save(self, json_response, filename):
-        pass
-
-
-class LocalStorage(StorageType):
+class LocalStorage():
 
     #json_file, api_name(filename)
     def save(self, json_response, filename):
@@ -64,13 +36,16 @@ class LocalStorage(StorageType):
         return filename + time_format + ".json"
 
 
-class DbStorage(StorageType):
+class DbStorage():
 
     def set_db(self):
-        engine = create_engine("mysql+pymysql://"+ USER +":" + PASSW +"@" + IP + "/" + DBNAME + "?charset=utf8mb4")
+        #engine = create_engine("mysql+pymysql://"+ USER +":" + PASSW +"@" + IP + "/" + DBNAME + "?charset=utf8mb4")
+        engine = create_engine("sqlite+pysqlite:///:memory:", echo=True, future=True)
         conn = engine.connect()
+        #Session = sessionmaker(bind=engine)
+        #session = Session()
 
-    def save(self, json_response, filename):
-        #TODO: Implement save
+    def save(self, companies):
+        
         return
 

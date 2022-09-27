@@ -1,10 +1,12 @@
+from datetime import date
+today = date.today()
 
-class Company:
+class Company():
 
     def __init__(self, company_params):
         self.uuid = company_params['uuid']
-        self.year_founded = self.format_year(company_params['founded_on'])
         self.name = company_params['identifier']
+        self.year_founded = self.format_year(company_params['founded_on'])
         self.founders = company_params['founder_identifiers']
         self.categories = company_params['categories']
         self.short_description = company_params['short_description']
@@ -19,6 +21,7 @@ class Company:
         self.country = company_params['country']
         self.region = company_params['region']
         self.city = company_params['city']
+        self.date_request = today
 
     def format_employees(self, code_employee):
         if code_employee == None:
@@ -41,4 +44,3 @@ class Company:
         if date != None:
             return date[:4]
         return date
-
