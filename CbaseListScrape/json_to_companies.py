@@ -56,5 +56,4 @@ def companies_array(dia):
     companies = []
     for i in json:
         companies.append(Company(json[i]))
-
-companies = companies_array()
+    return companies
