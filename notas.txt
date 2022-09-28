@@ -9,11 +9,5 @@ Parte 1 - Necessario
 2) Salvar as respostas em json -- FEITO
 3) Detectar requisicao invalida -- FEITO
 4) Modelar objeto de resposta -- FEITO
-5) Conectar script a base de dados
-
-Parte 2 - Se der tempo
-1) Request da "Timeline" de eventos
-2) ==
-3) ==
-4) ==
-5) ==
+5) Conectar a ORM do SQLAlchemy -- FEITO
+5) Conectar ORM a base de dados --
