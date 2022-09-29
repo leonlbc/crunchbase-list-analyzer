@@ -1,5 +1,5 @@
 import utils.file_utils as f_utils
-import storage
+from storage import StorageType
 from request import Request
 from dotenv import load_dotenv
 
@@ -16,7 +16,7 @@ def api_main():
 		json_response = req.call_api()
 		#Verifica se recebeu a resposta, se sim, salva (file ou db)
 		if json_response != None:
-			strg = storage.StorageType().choose('file')
+			strg = StorageType().choose('file')
 			strg.save(json_response, req.api_name)
 	else: print("> A API " + req.api_name + " ja foi acessada hoje")
 
