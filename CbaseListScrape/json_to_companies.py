@@ -1,3 +1,4 @@
+from datetime import datetime
 from company import Company
 import os, json
 
@@ -54,6 +55,8 @@ def clean_json(request):
 def companies_array(dia):
     json = clean_json(get_req(dia))
     companies = []
+    
+    dia = datetime.strptime(dia, '%d%m%Y')
     for i in json:
-        companies.append(Company(json[i]))
+        companies.append(Company(json[i], dia))
     return companies

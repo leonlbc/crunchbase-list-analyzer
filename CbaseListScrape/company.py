@@ -1,9 +1,7 @@
-from datetime import date
-today = date.today()
 
 class Company():
 
-    def __init__(self, company_params):
+    def __init__(self, company_params, dia):
         self.uuid = company_params['uuid']
         self.name = company_params['identifier']
         self.year_founded = self.format_year(company_params['founded_on'])
@@ -21,7 +19,7 @@ class Company():
         self.country = company_params['country']
         self.region = company_params['region']
         self.city = company_params['city']
-        self.date_request = today
+        self.date_request = dia
 
     def format_employees(self, code_employee):
         if code_employee == None:
@@ -40,7 +38,6 @@ class Company():
         return employees[code_employee]
     
     def format_year(self, date):
-        #Recebe data no formato yyyy-dd-mm e deixa yyyy
         if date != None:
             return date[:4]
         return date

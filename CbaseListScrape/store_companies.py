@@ -11,8 +11,6 @@ db_path = os.getenv("DB_PATH")
 engine = create_engine('sqlite:///{db_path}', echo=True)
 
 Session = sessionmaker(bind=engine)
-session = Session()
-
 def map_to_db(company_to_add):
     mapped_comp = session.query(Company).filter_by(uuid=company_to_add.uuid).first()
     if (mapped_comp == None):
@@ -33,6 +31,8 @@ def map_to_db(company_to_add):
             city = company_to_add.city
         )
 
+    #Rank
+    rank = None
     exist_rank_with_date = session.query(Rank.id).filter_by(date_req = company_to_add.date_request).filter_by(company_id = company_to_add.uuid).first() is not None
     if (exist_rank_with_date == False):
         rank = Rank(crunchbase_rank = company_to_add.crunchbase_rank,
@@ -73,11 +73,18 @@ def map_to_db(company_to_add):
                 mapped_comp.categories.append(category_retrieved)
             elif (category_exist_in_company(category_retrieved) == False):
                 mapped_comp.categories.append(category_retrieved)
-    
-    session.add(mapped_comp)
+    return mapped_comp
 
-companies = companies_array('26092022')
-for i in companies:
-    map_to_db(i)
+datas = []
+pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/saved'
 
-session.commit()
+for diretorio, dir_names, arquivos in os.walk(pasta):
+    for arquivo in arquivos:
+        print("arquivo:" + arquivo)
+        datas.append(arquivo[14:22])
+
+for i in datas:
+    companies = companies_array(i)
+    for i in companies:
+        with Session.begin() as session:
+            session.add(map_to_db(i))
