@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 db_path = os.getenv("DB_PATH")
 
-engine = create_engine('sqlite:///{db_path}', echo=True)
+engine = create_engine('sqlite:///db.sqlite3', echo=True)
 
 Session = sessionmaker(bind=engine)
 def map_to_db(company_to_add):

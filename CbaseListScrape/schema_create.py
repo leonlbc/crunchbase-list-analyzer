@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 db_path = os.getenv("DB_PATH")
 
-engine = create_engine('sqlite:///{db_path}', echo=True)
+engine = create_engine('sqlite:///db.sqlite3', echo=True)
 Base = declarative_base()
 
 company_founder = Table("company_founder", Base.metadata,
