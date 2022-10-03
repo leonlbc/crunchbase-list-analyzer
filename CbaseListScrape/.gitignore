@@ -3,3 +3,4 @@ __pycache__/
 .env
 *_cookies
 crunchBaseList_cookies
+.DS_Store
