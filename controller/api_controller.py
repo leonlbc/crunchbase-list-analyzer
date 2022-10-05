@@ -9,20 +9,20 @@ class ApiController:
 
 	def __init__(self, api_name):
 		self.request = Request(api_name)
-		self.load()
+		json_request_params = self.load_request_params()
+		self.request.set_request_params(json_request_params)
 		self.already_saved_today()
-	
-	def load(self):
-		request = self.load_request_params()
-		return self.request.set_request_params(request)
 
 	def load_request_params(self):
 		json_request = self.jsonify_request()
-		req = ['api_name', 'url', 'payload', 'headers', 'last_access']
-		for i in req:
+		param_keys = ['api_name', 'url', 'payload', 'headers', 'last_access']
+		self.verifica_parametros(param_keys, json_request)
+		return json_request
+
+	def verifica_parametros(self, param_keys, json_request):
+		for i in param_keys:
 			if i not in json_request.keys():
 				raise Exception("> O arquivo "+ self.request.params_filename +" precisa do parametro: \"" + i + "\"")
-		return json_request
 
 	def jsonify_request(self):
 		try:
