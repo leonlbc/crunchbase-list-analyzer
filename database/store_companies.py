@@ -4,6 +4,8 @@ from utils.json_to_companies import companies_array
 from sqlalchemy import create_engine
 from schema_create import Company, Rank, Founder, Category, company_category, company_founder
 
+#Script para converter json salvo localmente em objetos da ORM
+#e salva-los na base de dados
 
 engine = create_engine('sqlite:///db.sqlite3', echo=True)
 Session = sessionmaker(bind=engine)
@@ -70,16 +72,20 @@ def map_to_db(company_to_add):
                 mapped_comp.categories.append(category_retrieved)
     return mapped_comp
 
-datas = []
-pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/saved'
+#Codigo usado para armazenar todos os arquivos
+#que estao dentro da pasta saved
+#
+#datas = []
+#pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/saved'
+# for diretorio, dir_names, arquivos in os.walk(pasta):
+#     for arquivo in arquivos:
+#         print("arquivo:" + arquivo)
+#         datas.append(arquivo[14:22])
 
-for diretorio, dir_names, arquivos in os.walk(pasta):
-    for arquivo in arquivos:
-        print("arquivo:" + arquivo)
-        datas.append(arquivo[14:22])
+datas = ['05102022']
 
 for i in datas:
-    companies = companies_array(i)
+    companies = companies_array(i, 'hotTechCompanies')
     for i in companies:
         with Session.begin() as session:
             session.add(map_to_db(i))

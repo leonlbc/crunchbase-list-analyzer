@@ -2,9 +2,9 @@ from datetime import datetime
 from models.company import Company
 import os, json
 
-def get_req(dia):
+def get_req(dia, api_name):
     dirname = os.path.dirname(__file__)
-    request_path = os.path.join(dirname, 'saved', 'crunchBaseList' + dia +'.json')
+    request_path = os.path.join(dirname, 'saved', api_name + dia +'.json')
 
     with open(request_path, 'r') as f:
         request = json.load(f)
@@ -31,15 +31,18 @@ def clean_json(request):
                     company_request[j] = []
                     for k in i[j]:
                         for attr in attr_to_remove:
-                            try: del k[attr] #Remove dados desnecessarios
+                            #Remove dados desnecessarios
+                            try: del k[attr]
                             except KeyError: pass
                         if len(k.keys()) == 1:
-                            k = k['value'] #Para formatar ['value':'x'] em ['x'] 
+                            #Para formatar ['value':'x'] em ['x'] 
+                            k = k['value']
                             company_request[j].append(k)
                         elif len(k.keys()) == 2:
                             for key in k.keys():
                                 if key != 'value':
-                                    company_request[k[key]] = k['value'] #Para refatorar 'location_ids'
+                                    #Para formatar 'location_ids'
+                                    company_request[k[key]] = k['value'] 
                                     break
                     if company_request[j] == []: del company_request[j]
         
@@ -52,8 +55,8 @@ def clean_json(request):
         cleaned_request[company_request['identifier']] = company_request
     return cleaned_request
 
-def companies_array(dia):
-    json = clean_json(get_req(dia))
+def companies_array(dia, api_name):
+    json = clean_json(get_req(dia, api_name))
     companies = []
     
     dia = datetime.strptime(dia, '%d%m%Y')
