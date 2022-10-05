@@ -1,7 +1,6 @@
 from __future__ import annotations
 import json, os
 from datetime import date
-from dotenv import load_dotenv
 
 dirname = os.path.dirname(os.path.dirname(__file__))
 
@@ -18,7 +17,6 @@ class StorageType():
 
 class LocalStorage():
 
-    #json_file, api_name(filename)
     def save(self, json_response, filename):
         print('Salvando...')
         filename = self.format_filename(filename)
@@ -27,7 +25,6 @@ class LocalStorage():
             json.dump(json_response, outfile)
         return
     
-    #Formata nome do arquivo para ficar no formato (...)ddmmyy.json
     def format_filename(self, filename):
         today = date.today()
         time_format = today.strftime("%d%m%Y")

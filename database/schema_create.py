@@ -4,11 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 import uuid
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-db_path = os.getenv("DB_PATH")
 
 engine = create_engine('sqlite:///db.sqlite3', echo=True)
 Base = declarative_base()
@@ -17,6 +12,7 @@ company_founder = Table("company_founder", Base.metadata,
     Column("company_uuid", ForeignKey("companies.uuid"), primary_key=True),
     Column("founder_id", ForeignKey("founders.id"), primary_key=True),
 )
+
 company_category = Table("company_category", Base.metadata,
     Column("company_uuid", ForeignKey("companies.uuid"), primary_key=True),
     Column("category_id", ForeignKey("categories.id"), primary_key=True),

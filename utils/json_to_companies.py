@@ -1,5 +1,5 @@
 from datetime import datetime
-from company import Company
+from models.company import Company
 import os, json
 
 def get_req(dia):

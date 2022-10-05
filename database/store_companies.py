@@ -1,17 +1,15 @@
 import os
 from sqlalchemy.orm import sessionmaker
-from json_to_companies import companies_array
+from utils.json_to_companies import companies_array
 from sqlalchemy import create_engine
 from schema_create import Company, Rank, Founder, Category, company_category, company_founder
-from dotenv import load_dotenv
 
-load_dotenv()
-db_path = os.getenv("DB_PATH")
 
 engine = create_engine('sqlite:///db.sqlite3', echo=True)
-
 Session = sessionmaker(bind=engine)
+
 def map_to_db(company_to_add):
+    #Company
     mapped_comp = session.query(Company).filter_by(uuid=company_to_add.uuid).first()
     if (mapped_comp == None):
         mapped_comp = Company(
@@ -32,7 +30,6 @@ def map_to_db(company_to_add):
         )
 
     #Rank
-    rank = None
     exist_rank_with_date = session.query(Rank.id).filter_by(date_req = company_to_add.date_request).filter_by(company_id = company_to_add.uuid).first() is not None
     if (exist_rank_with_date == False):
         rank = Rank(crunchbase_rank = company_to_add.crunchbase_rank,
@@ -45,7 +42,6 @@ def map_to_db(company_to_add):
         return session.query(Founder).filter_by(name = founder).first()
     def founder_exist_in_company(founder):
         return session.query(company_founder).filter_by(founder_id = founder.id).filter_by(company_uuid = company_to_add.uuid).first()
-
     if (company_to_add.founders != None):
         for founder in company_to_add.founders:
             founder_retrieved = founder_exist_by_name(founder)
@@ -62,7 +58,6 @@ def map_to_db(company_to_add):
         return session.query(Category).filter_by(name = category).first()
     def category_exist_in_company(category):
         return session.query(company_category).filter_by(category_id = category.id).filter_by(company_uuid = company_to_add.uuid).first()
-
     if (company_to_add.categories != None):
         for category in company_to_add.categories:
             category_retrieved = category_exist_by_name(category)
