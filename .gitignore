@@ -2,6 +2,6 @@ __pycache__/
 *.py[cod]
 .env
 *_cookies
-crunchBaseList_cookies
+hotTechCompanies_cookies
 .DS_Store
 {db_path}

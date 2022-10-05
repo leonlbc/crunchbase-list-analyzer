@@ -1,5 +1,5 @@
 {
-    "api_name": "crunchBaseList",
+    "api_name": "hotTechCompanies",
     "url": "https://www.crunchbase.com/v4/data/lists/organization.companies/18356751-e468-4735-b94b-c22e4a87e838?source=list",
     "payload": {
         "field_ids": [
@@ -82,5 +82,5 @@
         "x-requested-with": "XMLHttpRequest",
         "x-xsrf-token": "riEbKrK1vUMJfRvgW52kaJeUBEVy0CZFIfD/REV9Zio"
     },
-    "last_access": "26092022"
+    "last_access": "05102022"
 }

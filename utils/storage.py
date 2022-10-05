@@ -20,7 +20,7 @@ class LocalStorage():
     def save(self, json_response, filename):
         print('Salvando...')
         filename = self.format_filename(filename)
-        file = os.path.join(dirname, 'CbaseListScrape', 'saved', filename)
+        file = os.path.join(dirname, 'saved', filename)
         with open(file, 'w') as outfile:
             json.dump(json_response, outfile)
         return
