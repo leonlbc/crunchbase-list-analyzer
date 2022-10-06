@@ -3,14 +3,14 @@ import json
 import requests
 import os
 
-class Api:
+class Request:
 	dirname = os.path.dirname(__file__)
 	params_keys = ['api_name', 'url', 'payload', 'headers', 'last_access']
 	
 	def __init__(self, api_name) -> None:
-		self.name = api_name
-		self.request_path = os.path.join(self.dirname, 'request_parameters', self.name, self.name + '_request.json')
-		self.cookies_path = os.path.join(self.dirname, 'request_parameters', self.name, self.name + '_cookies')
+		self.api_name = api_name
+		self.request_path = os.path.join(self.dirname, 'request_parameters', self.api_name, self.api_name + '_request.json')
+		self.cookies_path = os.path.join(self.dirname, 'request_parameters', self.api_name, self.api_name + '_cookies')
 		json_request_params = self.set_json()
 		self.set_request(json_request_params)
 
