@@ -1,6 +1,7 @@
-from __future__ import annotations
 import json, os
 from datetime import date
+from sqlalchemy import create_engine
+import sqlalchemy
 
 dirname = os.path.dirname(os.path.dirname(__file__))
 
@@ -17,14 +18,14 @@ class StorageType():
 
 class LocalStorage():
 
-    def save(self, json_response, filename):
+    def save(self, json_response, api_name):
         print('Salvando...')
-        filename = self.format_filename(filename)
-        file = os.path.join(dirname, 'saved', filename)
+        filename = self.format_filename(api_name)
+        file = os.path.join(dirname, 'saved', api_name, filename)
         with open(file, 'w') as outfile:
             json.dump(json_response, outfile)
         return
-    
+
     def format_filename(self, filename):
         today = date.today()
         time_format = today.strftime("%d%m%Y")
@@ -34,8 +35,10 @@ class LocalStorage():
 class DbStorage():
 
     def set_db(self):
-        pass
+        engine = create_engine('sqlite:///db.sqlite3', echo=True)
+        if sqlalchemy.inspect(engine).has_table("COMPANIES") == False:
+            print("> Rodar o script de criacao da base de dados")
 
     def save(self, companies):
-        return
+        pass
 

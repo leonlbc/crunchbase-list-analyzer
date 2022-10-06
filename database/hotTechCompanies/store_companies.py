@@ -72,20 +72,21 @@ def map_to_db(company_to_add):
                 mapped_comp.categories.append(category_retrieved)
     return mapped_comp
 
-#Codigo usado para armazenar todos os arquivos
-#que estao dentro da pasta saved
-#
-#datas = []
-#pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/saved'
-# for diretorio, dir_names, arquivos in os.walk(pasta):
-#     for arquivo in arquivos:
-#         print("arquivo:" + arquivo)
-#         datas.append(arquivo[14:22])
+# Codigo usado para armazenar todos os arquivos
+# que estao dentro da pasta saved
+
+api_name = 'hotTechCompanies'
+
+datas = []
+pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/saved/{0}'.format(api_name)
+for diretorio, dir_names, arquivos in os.walk(pasta):
+    for arquivo in arquivos:
+        datas.append(''.join(c for c in arquivo if c.isdigit()))
 
 datas = ['05102022']
 
 for i in datas:
-    companies = companies_array(i, 'hotTechCompanies')
+    companies = companies_array(i, api_name)
     for i in companies:
         with Session.begin() as session:
             session.add(map_to_db(i))

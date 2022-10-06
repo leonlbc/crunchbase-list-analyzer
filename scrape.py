@@ -1,14 +1,14 @@
 from utils.storage import StorageType
-from controller.api_controller import ApiController
+from api import Api
 import sys
 
 def scrape():
 	apis = sys.argv[1:]
 	for api_name in apis:
-		api = ApiController(api_name)
+		api = Api(api_name)
 		json_response = api.call_api()
 		strg = StorageType().choose('file')
-		strg.save(json_response, api.get_name())
+		strg.save(json_response, api.name)
 
 if __name__ == '__main__':
 	scrape()

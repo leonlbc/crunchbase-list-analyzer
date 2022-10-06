@@ -5,7 +5,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 import uuid
 
-engine = create_engine('sqlite:///db.sqlite3', echo=True)
+engine = create_engine('sqlite:///db.sqlite3', echo=False)
 Base = declarative_base()
 
 company_founder = Table("company_founder", Base.metadata,
@@ -98,4 +98,5 @@ class Category(Base):
         self.id = uuid.uuid4().hex
         self.name = name
 
-Base.metadata.create_all(engine)
+def set_db():
+    Base.metadata.create_all(engine)
