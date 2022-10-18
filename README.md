@@ -1,7 +1,7 @@
 
-# Crunchbase Scrape
+# Crunchbase List Analyzer
 
-Um scraping de listas do site Crunchbase.
+Um gerador de dataviz de listas do site Crunchbase.
 
 O script atualmente funciona com a lista "Hot Tech Companies Globally", e armazena os dados das top 100 empresas de tech, de acordo com as métricas da Crunchbase, afim de gerar graficos e visualizacoes para um futuro WebApp.
 
