@@ -71,11 +71,9 @@ class Request:
 			response.raise_for_status()
 		except requests.exceptions.HTTPError as e:
 			raise ConnectionError("> Erro de conexao!")
-		self.validate_response(response)
+		res = self.validate_response(response)
 		print("> Resposta Valida")
-		json_response = response.json()
-		self.update_last_access()
-		return json_response
+		return res
 
 	def update_last_access(self) -> None:
 		'''Atualiza ultimo acesso'''

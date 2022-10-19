@@ -37,7 +37,8 @@ class DbStorage():
     def set_db(self):
         engine = create_engine('sqlite:///db.sqlite3', echo=True)
         if sqlalchemy.inspect(engine).has_table("COMPANIES") == False:
-            print("> Rodar o script de criacao da base de dados")
+            print("> Rodando o script de criacao da base de dados")
+            #TODO Importar arquivo de schema e rodar
 
     def save(self, companies):
         pass
