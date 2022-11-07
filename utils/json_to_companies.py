@@ -1,34 +1,34 @@
 from datetime import datetime
-from models.company import Company
+from models.response import Response
 import os, json
 
-def get_req(dia, api_name):
-    dirname = os.path.dirname(__file__)
-    request_path = os.path.join(dirname, api_name, 'saved', dia + '.json')
+def get_res(dia, api_name):
+    dirname = os.path.dirname(os.path.dirname(__file__))
+    response_path = os.path.join(dirname, api_name, 'saved', dia + '.json')
 
-    with open(request_path, 'r') as f:
-        request = json.load(f)
-    return request
+    with open(response_path, 'r') as f:
+        response = json.load(f)
+    return response
 
-def clean_json(request):
+def clean_json(response):
     params = ['identifier', 'founded_on' ,'num_employees_enum', 'categories', 'founder_identifiers',
             'location_identifiers', 'short_description',  'funding_stage', 'last_funding_type', 'last_funding_at',
             'rank_org_company', 'acquisition_announced_on', 'acquirer_identifier']
-    cleaned_request = {}
-    for i in request['entities']:
-        company_request = {}
-        company_request['uuid'] = i['uuid']
+    cleaned_response = {}
+    for i in response['entities']:
+        company_response = {}
+        company_response['uuid'] = i['uuid']
         i = i['properties']
         for j in params:
-            company_request[j] = None
+            company_response[j] = None
             if j in i:
                 if isinstance(i[j], (str, int)):
-                    company_request[j] = i[j]
+                    company_response[j] = i[j]
                 elif isinstance(i[j], dict):
-                    company_request[j] = i[j]['value']
+                    company_response[j] = i[j]['value']
                 elif isinstance(i[j], list):
                     attr_to_remove = ['entity_def_id', 'permalink', 'uuid', 'image_id']
-                    company_request[j] = []
+                    company_response[j] = []
                     for k in i[j]:
                         for attr in attr_to_remove:
                             #Remove dados desnecessarios
@@ -37,29 +37,28 @@ def clean_json(request):
                         if len(k.keys()) == 1:
                             #Para formatar ['value':'x'] em ['x'] 
                             k = k['value']
-                            company_request[j].append(k)
+                            company_response[j].append(k)
                         elif len(k.keys()) == 2:
                             for key in k.keys():
                                 if key != 'value':
                                     #Para formatar 'location_ids'
-                                    company_request[k[key]] = k['value'] 
+                                    company_response[k[key]] = k['value'] 
                                     break
-                    if company_request[j] == []: del company_request[j]
+                    if company_response[j] == []: del company_response[j]
         
         try: #Em casos sem 'location_ids', atribui None p/ os campos
-            if company_request['location_identifiers'] == None:
+            if company_response['location_identifiers'] == None:
                 for l in ['continent', 'country', 'region', 'city']:
-                    company_request[l] = None
+                    company_response[l] = None
         except KeyError: pass
 
-        cleaned_request[company_request['identifier']] = company_request
-    return cleaned_request
+        cleaned_response[company_response['identifier']] = company_response
+    return cleaned_response
 
-def companies_array(dia, api_name):
-    json = clean_json(get_req(dia, api_name))
-    companies = []
-    
+def response_array(dia, json_response):
+    json = clean_json(json_response)
+    response = []
     dia = datetime.strptime(dia, '%d%m%Y')
     for i in json:
-        companies.append(Company(json[i], dia))
-    return companies
+        response.append(Response(json[i], dia))
+    return response

@@ -87,7 +87,6 @@ class Founder(Base):
         self.id = uuid.uuid4().hex
         self.name = name
         
-
 class Category(Base):
     __tablename__ = 'categories'
     id = Column(String, primary_key=True)

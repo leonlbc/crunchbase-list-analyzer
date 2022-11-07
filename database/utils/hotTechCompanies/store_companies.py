@@ -1,16 +1,12 @@
 import os
 from sqlalchemy.orm import sessionmaker
-from utils.json_to_companies import companies_array
-from sqlalchemy import create_engine
-from schema_create import Company, Rank, Founder, Category, company_category, company_founder
+from utils.json_to_companies import response_array, get_res
+from database.utils.hotTechCompanies.schema_create import Company, Rank, Founder, Category, company_category, company_founder
 
 #Script para converter json salvo localmente em objetos da ORM
 #e salva-los na base de dados
 
-engine = create_engine('sqlite:///db.sqlite3', echo=True)
-Session = sessionmaker(bind=engine)
-
-def map_to_db(company_to_add):
+def map_to_db(company_to_add, session):
     #Company
     mapped_comp = session.query(Company).filter_by(uuid=company_to_add.uuid).first()
     if (mapped_comp == None):
@@ -72,22 +68,27 @@ def map_to_db(company_to_add):
                 mapped_comp.categories.append(category_retrieved)
     return mapped_comp
 
-# Codigo usado para armazenar todos os arquivos
-# que estao dentro da pasta saved
-
-api_name = 'hotTechCompanies'
-
-#Monta um array com todas as datas que estao nos nomes das respostas salvas
-datas = []
-pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/{0}/saved'.format(api_name)
-for diretorio, dir_names, arquivos in os.walk(pasta):
-    for arquivo in arquivos:
-        datas.append(''.join(c for c in arquivo if c.isdigit()))
-
-datas = ['05102022']
-
-for i in datas:
-    companies = companies_array(i, api_name)
+def map_date(dia, json_response, engine):
+    Session = sessionmaker(bind=engine)
+    companies = response_array(dia, json_response)
     for i in companies:
         with Session.begin() as session:
-            session.add(map_to_db(i))
+            session.add(map_to_db(i, session))
+
+
+# Codigo usado no comeco do desenvolvimento
+# para transferir todos os arquivos json da pasta saved para a base de dados
+
+def store_by_filenames(api_name, engine):
+    dates = date_list(api_name)
+    for date in dates:
+        response_json = get_res(date, api_name)
+        map_date(date, response_json, engine)
+
+def date_list(api_name):
+    datas = []
+    pasta = str(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))) + '/{0}/saved'.format(api_name)
+    for diretorio, dir_names, arquivos in os.walk(pasta):
+        for arquivo in arquivos:
+            datas.append(''.join(c for c in arquivo if c.isdigit()))
+    return datas

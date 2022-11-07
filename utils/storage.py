@@ -1,9 +1,11 @@
 import json, os
 from datetime import date
-from sqlalchemy import create_engine
 import sqlalchemy
+import database.utils.hotTechCompanies.schema_create as schema_create
+import database.utils.hotTechCompanies.store_companies as store_companies
 
 parent_dirname = os.path.dirname(os.path.dirname(__file__))
+today = date.today()
 
 class StorageType():
     
@@ -20,29 +22,29 @@ class LocalStorage():
 
     def save(self, json_response, api_name):
         print('Salvando...')
-        filename = self.format_filename(api_name)
+        filename = self.format_filename()
         file = os.path.join(parent_dirname, api_name, 'saved', filename)
         with open(file, 'w') as outfile:
             json.dump(json_response, outfile)
         return
 
-    def format_filename(self, filename):
-        today = date.today()
+    def format_filename(self):
         time_format = today.strftime("%d%m%Y")
         return time_format + ".json"
 
 
-#TODO Implementar Armazenamento na DB
 class DbStorage():
 
-    def set_db(self):
-        engine = create_engine('sqlite:///db.sqlite3', echo=True)
-        if sqlalchemy.inspect(engine).has_table("COMPANIES") == False:
+    def set_db(self) -> bool:
+        if sqlalchemy.inspect(schema_create.engine).has_table("COMPANIES") == False:
             print("> Rodando o script de criacao da base de dados")
-            #TODO Importar arquivo de schema e rodar
-        ...
-        
-    def save(self, companies):
+            schema_create.set_db()
+
+    def save(self, json_response, api_name):
         self.set_db()
-        ...
-        pass
+        time_format = today.strftime("%d%m%Y")
+        store_companies.map_date(time_format, json_response, schema_create.engine)
+        # store_companies.store_by_filenames(api_name, schema_create.engine)
+        # Salva todos os arquivos da pasta /{api_name}/saved
+
+

@@ -69,9 +69,11 @@ class Request:
 		try:
 			response = requests.post(self.url, json = self.payload, headers = self.headers)
 			response.raise_for_status()
-		except requests.exceptions.HTTPError as e:
-			raise ConnectionError("> Erro de conexao!")
+		except requests.exceptions.HTTPError:
+			print("> Erro de conexao!")
+			raise
 		res = self.validate_response(response)
+		self.update_last_access()
 		print("> Resposta Valida")
 		return res
 
@@ -91,7 +93,9 @@ class Request:
 			res = response.json()
 			print('> Resposta: ' + response.text[:30] + '(...)')
 		except ValueError:
-			raise Exception("> Resposta Invalida!")
+			print("> Resposta Invalida!")
+			print("> Insira novos cookies no arquivo 'cookies'")
+			raise ValueError
 		else:
 			return res
 	
