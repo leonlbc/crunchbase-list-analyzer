@@ -77,8 +77,9 @@ def map_to_db(company_to_add):
 
 api_name = 'hotTechCompanies'
 
+#Monta um array com todas as datas que estao nos nomes das respostas salvas
 datas = []
-pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/saved/{0}'.format(api_name)
+pasta = str(os.path.dirname(os.path.abspath(__file__))) + '/{0}/saved'.format(api_name)
 for diretorio, dir_names, arquivos in os.walk(pasta):
     for arquivo in arquivos:
         datas.append(''.join(c for c in arquivo if c.isdigit()))

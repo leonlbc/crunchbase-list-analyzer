@@ -4,7 +4,7 @@ import os, json
 
 def get_req(dia, api_name):
     dirname = os.path.dirname(__file__)
-    request_path = os.path.join(dirname, 'saved', api_name + dia +'.json')
+    request_path = os.path.join(dirname, api_name, 'saved', dia + '.json')
 
     with open(request_path, 'r') as f:
         request = json.load(f)

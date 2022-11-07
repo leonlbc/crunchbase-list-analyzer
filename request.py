@@ -9,8 +9,8 @@ class Request:
 	
 	def __init__(self, api_name) -> None:
 		self.api_name = api_name
-		self.request_path = os.path.join(self.dirname, 'request_parameters', self.api_name, self.api_name + '_request.json')
-		self.cookies_path = os.path.join(self.dirname, 'request_parameters', self.api_name, self.api_name + '_cookies')
+		self.request_path = os.path.join(self.dirname, api_name, 'request.json')
+		self.cookies_path = os.path.join(self.dirname, api_name, 'cookies')
 		json_request_params = self.set_json()
 		self.set_request(json_request_params)
 
