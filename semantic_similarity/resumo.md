@@ -13,3 +13,13 @@ cruzarei todas as categorias de uma empresa com todas de cada uma das outras emp
 a fim de computar um novo score, agora nao mais entre categorias, mas sim empresas. Com base nesse 
 calculo, ligarei as 'k' empresas mais similares e armazenarei essa ligação com uma nova join table 
 de empresas denominada "Similarity".
+
+# Resultados
+
+Utilizar as categorias das empresas para estabelecer o quao similares elas são não gerou resultados 
+tão satisfatórios em alguns casos. Isso aconteceu por alguns motivos, sendo os principais: 
+categorias mal selecionadas para uma certa empresa (não representam bem a atividade fim da empresa);
+empresas com muitas categorias que causaram uma relação maior com uma maior quantidade de empresas, 
+sem que a atividade fim tivesse relação. 
+
+Tentarei utilizar os embeddings das descricoes das empresas para melhorar esse score.
