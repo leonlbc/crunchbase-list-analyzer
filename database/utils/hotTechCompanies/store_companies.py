@@ -1,6 +1,6 @@
 import os
 from sqlalchemy.orm import sessionmaker
-from utils.json_to_companies import response_array, get_res
+from utils.json_to_response import response_array, get_res
 from database.utils.hotTechCompanies.schema_create import Company, Rank, Founder, Category, company_category, company_founder
 
 #Script para converter json salvo localmente em objetos da ORM
