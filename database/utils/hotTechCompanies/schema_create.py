@@ -3,9 +3,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
-import uuid
+import uuid, os, sys, json
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(os.path.dirname(currentdir))
+sys.path.append(parentdir)
+with open("config.json", 'r') as f:
+    config = json.load(f)
 
-engine = create_engine('sqlite:///db.sqlite3', echo=False)
+engine = create_engine(config["db_path"], echo=False)
 Base = declarative_base()
 
 company_founder = Table("company_founder", Base.metadata,
@@ -21,20 +26,20 @@ company_category = Table("company_category", Base.metadata,
 class Company(Base):
     __tablename__ = 'companies'
 
-    uuid = Column(String, primary_key=True)
-    name = Column(String)
-    year_founded = Column(String)
-    short_description = Column(String)
-    num_employees = Column(Integer)
-    last_funding_type = Column(String)
-    last_funding_at = Column(String)
-    acquirer = Column(String)
-    announce_date = Column(String)
-    funding_stage = Column(String)
-    continent = Column(String)
-    country = Column(String)
-    region = Column(String)
-    city = Column(String)
+    uuid = Column(String(60), primary_key=True)
+    name = Column(String(60))
+    year_founded = Column(String(60))
+    short_description = Column(String(600))
+    num_employees = Column(String(10))
+    last_funding_type = Column(String(60))
+    last_funding_at = Column(String(60))
+    acquirer = Column(String(60))
+    announce_date = Column(String(60))
+    funding_stage = Column(String(60))
+    continent = Column(String(60))
+    country = Column(String(60))
+    region = Column(String(60))
+    city = Column(String(60))
 
     founders = relationship("Founder", secondary=company_founder, back_populates="companies")
     categories = relationship("Category", secondary=company_category, back_populates="companies")
@@ -63,10 +68,10 @@ class Company(Base):
 
 class Rank(Base):
     __tablename__ = 'ranks'
-    id = Column(String, primary_key=True)
+    id = Column(String(60), primary_key=True)
     crunchbase_rank = Column(Integer)
     date_req = Column(Date)
-    company_id = Column(String, ForeignKey("companies.uuid"))
+    company_id = Column(String(60), ForeignKey("companies.uuid"))
     company = relationship("Company", back_populates="ranks")
 
     def __init__(self, crunchbase_rank, date_req):
@@ -79,8 +84,8 @@ class Rank(Base):
 
 class Founder(Base):
     __tablename__ = 'founders'
-    id = Column(String, primary_key=True)
-    name = Column(String)
+    id = Column(String(60), primary_key=True)
+    name = Column(String(60))
     companies = relationship("Company", secondary=company_founder ,back_populates="founders")
 
     def __init__(self, name):
@@ -89,8 +94,8 @@ class Founder(Base):
         
 class Category(Base):
     __tablename__ = 'categories'
-    id = Column(String, primary_key=True)
-    name = Column(String)
+    id = Column(String(60), primary_key=True)
+    name = Column(String(60))
     companies = relationship("Company", secondary=company_category ,back_populates="categories")
 
     def __init__(self, name):
@@ -99,3 +104,6 @@ class Category(Base):
 
 def set_db():
     Base.metadata.create_all(engine)
+
+if __name__ == '__main__':
+    set_db()

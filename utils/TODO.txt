@@ -1,0 +1,8 @@
+1.[]Figma das telas
+2.[]Definir quais graficos
+3.[]Inserir graficos no front
+4.[]Similaridade por descricao
+
+1. -
+2. Analisar quais dados temos e o que podemos extrair de
+funcionalidade e visualizacao deles

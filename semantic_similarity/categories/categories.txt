@@ -1,0 +1,323 @@
+Accounting
+Ad Targeting
+Advanced Materials
+Advertising
+Advertising Platforms
+Advice
+Aerospace
+Affiliate Marketing
+Agriculture
+AgTech
+Air Transportation
+Analytics
+Animation
+Apps
+Architecture
+Art
+Artificial Intelligence
+Asset Management
+Audio
+Augmented Reality
+Automotive
+Autonomous Vehicles
+B2B
+Banking
+Battery
+Beauty
+Big Data
+Billing
+Biometrics
+Biotechnology
+Bitcoin
+Blockchain
+Building Maintenance
+Building Material
+Business Development
+Business Information Systems
+Business Intelligence
+Cannabis
+Car Sharing
+Child Care
+Civil Engineering
+Clean Energy
+CleanTech
+Cloud Computing
+Cloud Data Services
+Cloud Infrastructure
+Cloud Management
+Cloud Security
+Coffee
+Collaboration
+Commercial
+Commercial Insurance
+Commercial Real Estate
+Communications Infrastructure
+Communities
+Compliance
+Computer
+Computer Vision
+Construction
+Consulting
+Consumer
+Consumer Electronics
+Consumer Goods
+Consumer Lending
+Consumer Research
+Content
+Content Creators
+Content Delivery Network
+Content Marketing
+Cosmetics
+Credit
+Credit Cards
+CRM
+Crowdfunding
+Crowdsourcing
+Cryptocurrency
+Customer Service
+Cyber Security
+Data Integration
+Data Visualization
+Database
+Debit Cards
+Delivery
+Dental
+Developer APIs
+Developer Platform
+Developer Tools
+Dietary Supplements
+Digital Entertainment
+Digital Marketing
+Digital Media
+Document Management
+Drones
+E-Commerce
+E-Commerce Platforms
+E-Learning
+EdTech
+Education
+Elder Care
+Elderly
+Electric Vehicle
+Electronic Design Automation (EDA)
+Electronic Health Record (EHR)
+Electronics
+Email
+Employee Benefits
+Employment
+Energy
+Energy Efficiency
+Energy Management
+Energy Storage
+Enterprise
+Enterprise Resource Planning (ERP)
+Enterprise Software
+Environmental Engineering
+eSports
+Ethereum
+Event Management
+Events
+Eyewear
+Fantasy Sports
+Farming
+Fashion
+Fertility
+Film Production
+Finance
+Financial Services
+FinTech
+Fitness
+Food and Beverage
+Food Delivery
+Food Processing
+Fraud Detection
+Freight Service
+Funding Platform
+Gaming
+Generation Z
+Geospatial
+Gift
+Government
+GPS
+Green Building
+GreenTech
+Grocery
+Hardware
+Health Care
+Health Diagnostics
+Health Insurance
+Hedge Funds
+Higher Education
+Home and Garden
+Home Health Care
+Home Improvement
+Home Services
+Hospital
+Hospitality
+Hotel
+Human Computer Interaction
+Human Resources
+IaaS
+Identity Management
+Impact Investing
+Industrial
+Industrial Automation
+Industrial Engineering
+Industrial Manufacturing
+Information Services
+Information Technology
+Infrastructure
+Innovation Management
+Insurance
+InsurTech
+Internet
+Internet of Things
+Knowledge Management
+Last Mile Transportation
+Laundry and Dry-cleaning
+Legal Tech
+Lending
+Life Insurance
+Life Science
+Lifestyle
+Local
+Location Based Services
+Logistics
+Loyalty Programs
+Machine Learning
+Made to Order
+Management Consulting
+Manufacturing
+Mapping Services
+Market Research
+Marketing
+Marketing Automation
+Marketplace
+Media and Entertainment
+Medical
+Medical Device
+Meeting Software
+Messaging
+mHealth
+Micro Lending
+Mining Technology
+Mobile
+Mobile Apps
+Mobile Payments
+Music
+National Security
+Natural Resources
+Navigation
+Network Hardware
+Network Security
+News
+Nutraceutical
+Nutrition
+Oil and Gas
+Online Games
+Open Source
+Operating Systems
+Organic
+Organic Food
+Outsourcing
+PaaS
+Packaging Services
+Payments
+PC Games
+Peer to Peer
+Personal Finance
+Personal Health
+Pet
+Pharmaceutical
+Photo Editing
+Photography
+Point of Sale
+Predictive Analytics
+Privacy
+Procurement
+Product Management
+Productivity Tools
+Professional Services
+Property Development
+Property Insurance
+Property Management
+Psychology
+Public Safety
+Publishing
+Quality Assurance
+Quantum Computing
+Real Estate
+Real Estate Investment
+Real Time
+Recruiting
+Recycling
+Renewable Energy
+Rental
+Rental Property
+Reservations
+Residential
+Restaurants
+Retail
+Retail Technology
+Risk Management
+Robotics
+SaaS
+Sales
+Sales Automation
+Satellite Communication
+Scheduling
+Security
+Semiconductor
+Sensor
+Service Industry
+Sex Tech
+Shipping
+Shopping
+Small and Medium Businesses
+Smart Building
+Smart Cities
+Snack Food
+Soccer
+Social Impact
+Social Media
+Social Network
+Software
+Software Engineering
+Solar
+Space Travel
+Speech Recognition
+Sports
+STEM Education
+Subscription Service
+Supply Chain Management
+Sustainability
+Task Management
+Telecommunications
+Therapeutics
+Tourism
+Toys
+Trading Platform
+Training
+Transportation
+Travel
+Travel Accommodations
+Travel Agency
+Vacation Rental
+Venture Capital
+Veterinary
+Video
+Video Games
+Video on Demand
+Video Streaming
+Virtual Assistant
+Virtual Reality
+Warehousing
+Waste Management
+Wealth Management
+Wearables
+Web Development
+Wedding
+Wellness
+Wholesale
+Wireless
+Women's

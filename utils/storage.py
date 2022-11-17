@@ -17,7 +17,6 @@ class StorageType():
             strg = DbStorage()
         return strg
 
-
 class LocalStorage():
 
     def save(self, json_response, api_name):
@@ -31,7 +30,6 @@ class LocalStorage():
     def format_filename(self):
         time_format = today.strftime("%d%m%Y")
         return time_format + ".json"
-
 
 class DbStorage():
 

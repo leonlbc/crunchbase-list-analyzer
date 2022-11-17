@@ -1,0 +1,3 @@
+{
+    "db_path": "mysql+mysqldb://root:r00t@127.0.0.1:3306/pinter"
+}

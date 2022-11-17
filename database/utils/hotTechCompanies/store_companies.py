@@ -1,7 +1,15 @@
-import os
+import os, sys
 from sqlalchemy.orm import sessionmaker
-from utils.json_to_response import response_array, get_res
-from database.utils.hotTechCompanies.schema_create import Company, Rank, Founder, Category, company_category, company_founder
+from sqlalchemy import create_engine
+if __name__ == "__main__":
+    from schema_create import Company, Rank, Founder, Category, company_category, company_founder
+    currentdir = os.path.dirname(os.path.realpath(__file__))
+    parentdir = os.path.dirname(os.path.dirname(os.path.dirname(currentdir)))
+    sys.path.append(parentdir)
+    from utils.json_to_response import response_array, get_res
+else:
+    from utils.json_to_response import response_array, get_res
+    from database.utils.hotTechCompanies.schema_create import Company, Rank, Founder, Category, company_category, company_founder
 
 #Script para converter json salvo localmente em objetos da ORM
 #e salva-los na base de dados
@@ -64,7 +72,7 @@ def map_to_db(company_to_add, session):
                     name = category
                 )
                 mapped_comp.categories.append(category_retrieved)
-            elif (category_exist_in_company(category_retrieved) == False):
+            elif (category_exist_in_company(category_retrieved) == None):
                 mapped_comp.categories.append(category_retrieved)
     return mapped_comp
 
@@ -74,7 +82,6 @@ def map_date(dia, json_response, engine):
     for i in companies:
         with Session.begin() as session:
             session.add(map_to_db(i, session))
-
 
 # Codigo usado no comeco do desenvolvimento
 # para transferir todos os arquivos json da pasta saved para a base de dados
@@ -92,3 +99,7 @@ def date_list(api_name):
         for arquivo in arquivos:
             datas.append(''.join(c for c in arquivo if c.isdigit()))
     return datas
+
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://root:r00t@127.0.0.1:3306/pinter', echo=False)
+    store_by_filenames('hotTechCompanies',engine)

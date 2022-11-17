@@ -18,9 +18,10 @@ def scrape():
 			try_again = input("Tentar novamente? (s/n): ")
 			if try_again.lower().strip() == "s":
 				request.insert_cookies()
-
-	strg = StorageType().choose('file')
-	strg.save(json_response, api_name)
+		except Exception as e:
+			raise e
+	
+	StorageType().choose('file').save(json_response, api_name)
 
 if __name__ == '__main__':
 	scrape()
