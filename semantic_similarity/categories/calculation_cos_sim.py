@@ -129,7 +129,6 @@ for i in comp_group_similar:
 
     comp_group_similar[i] = comp_by_highest_score
 
-
 for i in comp_group_similar:
     print(str(i) + ": " + str(comp_group_similar[i]))
     print()
