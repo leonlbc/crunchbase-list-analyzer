@@ -1,16 +1,20 @@
 import os, sys
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+import json
 if __name__ == "__main__":
-    from schema_create import Company, Rank, Founder, Category, company_category, company_founder
+    from schema_create import Company, Rank, Founder, Category, company_category, company_founder, Similar
     currentdir = os.path.dirname(os.path.realpath(__file__))
-    parentdir = os.path.dirname(os.path.dirname(os.path.dirname(currentdir)))
-    sys.path.append(parentdir)
+    root_dir = os.path.dirname(os.path.dirname(os.path.dirname(currentdir)))
+    sys.path.append(root_dir)
     from utils.json_to_response import response_array, get_res
 else:
     from utils.json_to_response import response_array, get_res
-    from database.utils.hotTechCompanies.schema_create import Company, Rank, Founder, Category, company_category, company_founder
+    from database.utils.hotTechCompanies.schema_create import Company, Rank, Founder, Category, company_category, company_founder, Similar
 
+with open("config.json", 'r') as f:
+        config = json.load(f)
+    
 #Script para converter json salvo localmente em objetos da ORM
 #e salva-los na base de dados
 
@@ -83,9 +87,6 @@ def map_date(dia, json_response, engine):
         with Session.begin() as session:
             session.add(map_to_db(i, session))
 
-# Codigo usado no comeco do desenvolvimento
-# para transferir todos os arquivos json da pasta saved para a base de dados
-
 def store_by_filenames(api_name, engine):
     dates = date_list(api_name)
     for date in dates:
@@ -101,5 +102,5 @@ def date_list(api_name):
     return datas
 
 if __name__ == "__main__":
-    engine = create_engine('mysql+mysqldb://root:r00t@127.0.0.1:3306/pinter', echo=False)
+    engine = create_engine(config['db_path'], echo=False)
     store_by_filenames('hotTechCompanies',engine)

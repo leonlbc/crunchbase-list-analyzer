@@ -1,12 +1,9 @@
-from sqlalchemy import Column, Integer, String, Table, Date
+from sqlalchemy import Column, Integer, String, Table, Date, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 import uuid, os, sys, json
-currentdir = os.path.dirname(os.path.realpath(__file__))
-parentdir = os.path.dirname(os.path.dirname(currentdir))
-sys.path.append(parentdir)
 with open("config.json", 'r') as f:
     config = json.load(f)
 
@@ -25,7 +22,6 @@ company_category = Table("company_category", Base.metadata,
 
 class Company(Base):
     __tablename__ = 'companies'
-
     uuid = Column(String(60), primary_key=True)
     name = Column(String(60))
     year_founded = Column(String(60))
@@ -65,6 +61,19 @@ class Company(Base):
 
     def __repr__(self):
         return f"<Company(id={self.uuid!r}, name={self.name!r})>"
+
+class Similar(Base):
+    __tablename__ = 'similars'
+    id = Column(String(60), primary_key=True)
+    company_1_uuid = Column(String(60), ForeignKey("companies.uuid"))
+    company_2_uuid = Column(String(60), ForeignKey("companies.uuid"))
+    score = Column(Float)
+
+    def __init__(self, company_1_uuid, company_2_uuid, score):
+        self.id = uuid.uuid4().hex
+        self.company_1_uuid = company_1_uuid
+        self.company_2_uuid = company_2_uuid
+        self.score = score
 
 class Rank(Base):
     __tablename__ = 'ranks'

@@ -21,7 +21,7 @@ def scrape():
 		except Exception as e:
 			raise e
 	
-	StorageType().choose('file').save(json_response, api_name)
+	StorageType().choose('file').save(api_name, json_response)
 
 if __name__ == '__main__':
 	scrape()

@@ -33,16 +33,13 @@ class LocalStorage():
 
 class DbStorage():
 
-    def set_db(self) -> bool:
+    def set_db(self):
         if sqlalchemy.inspect(schema_create.engine).has_table("COMPANIES") == False:
             print("> Rodando o script de criacao da base de dados")
             schema_create.set_db()
 
-    def save(self, json_response, api_name):
+    def save(self, api_name, json_response):
         self.set_db()
         time_format = today.strftime("%d%m%Y")
         store_companies.map_date(time_format, json_response, schema_create.engine)
-        # store_companies.store_by_filenames(api_name, schema_create.engine)
-        # Salva todos os arquivos da pasta /{api_name}/saved
-
 
