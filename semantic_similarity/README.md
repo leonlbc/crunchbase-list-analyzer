@@ -1,6 +1,6 @@
-# Semelhanca entre semantica das categorias das empresas utilizando o SentenceTransformer
+# Calculo da semelhanca entre as empresas por meio da similaridade semantica de suas categorias utilizando o SentenceTransformer (Sentence-Bert)
 
-Irei selecionar as empresas similares a cada empresa utilizando a relacao entre os scores de 
+Irei calcular e armazenar os scores de similaridade entre as empresas similares utilizando a relacao entre os scores de 
 similaridade das categorias delas a fim de utilizarmos essas informacoes no WebApp Crunchbase List 
 Analyzer.
 
@@ -10,9 +10,8 @@ SBert - 'https://www.sbert.net/docs/pretrained_models.html'), para gerar os embe
 categorias. A partir desses dados, aplicarei uma funcao de similaridade por cosseno, que computa um 
 score de 0-1, sendo 1 total relacao e 0 nehuma relacao entre as categorias. A partir desse score,
 cruzarei todas as categorias de uma empresa com todas de cada uma das outras empresas,
-a fim de computar um novo score, agora nao mais entre categorias, mas sim empresas. Com base nesse 
-calculo, ligarei as 'k' empresas mais similares e armazenarei essa ligação com uma nova join table 
-de empresas denominada "Similarity".
+a fim de computar um novo score, agora nao mais entre as categorias, mas sim entre as empresas. Com base nesse 
+calculo, ligarei as 'k' empresas mais similares e armazenarei essa ligação com uma nova join table denominada "Similarity".
 
 # Resultados
 
@@ -28,6 +27,6 @@ Tentarei utilizar os embeddings das descricoes das empresas para melhorar esse s
 
 Os embeddings das descricoes precisaram de tratamento: remoção de nome da empresa do texto, remoção de 
 stop-words. Enquanto eu testava novos scores de similaridades, voltei para as categorias e testei mais 
-maneiras de calcular os scores baseados nelas. Apenas mantive as empresas com relação alta (>5), e atribuí um 
-peso paras empresas com relação de similaridade > 8 (extremamente similar). Os resultados foram mais 
+maneiras de calcular os scores baseados nelas. Apenas mantive as empresas com relação alta ( > 0.5), e atribuí um 
+peso maior para as empresas com relação de similaridade > 0.8 (extremamente similar). Os resultados foram mais 
 satisfatórios, e por enquanto bastaram para o protótipo.
